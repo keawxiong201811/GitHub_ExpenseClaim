@@ -39,10 +39,7 @@ namespace ExpenseClaim.Controllers
                 if (ClaimId <= 0)
                     return ToExpenseClaimNew("Failed to create expense claim.");
                 else
-                {
-                    ViewBag.ExpenseClaim = claimserv.GetClaim(ClaimId);
-                    ViewBag.Message = "Expense claim successfully created.";
-                }
+                    ToExpenseClaimDetail(ClaimId,"Expense claim successfully created.");
             }
             catch(Exception ex)
             {

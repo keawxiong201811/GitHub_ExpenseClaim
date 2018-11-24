@@ -185,8 +185,7 @@ namespace HrSystemLib.DataAccess
             DbDataAdapter dbDataAdaptor = _dbProvider.CreateDataAdapter();
             dbDataAdaptor.InsertCommand = dbCommand;
 
-            int result = dbDataAdaptor.InsertCommand.ExecuteNonQuery();
-
+            var result = Convert.ToInt32(dbDataAdaptor.InsertCommand.ExecuteScalar());
             if (dbConn.State == ConnectionState.Open)
                 dbConn.Close();
 
@@ -216,7 +215,7 @@ namespace HrSystemLib.DataAccess
             DbDataAdapter dbDataAdaptor = _dbProvider.CreateDataAdapter();
             dbDataAdaptor.InsertCommand = dbCommand;
 
-            int result = dbDataAdaptor.InsertCommand.ExecuteNonQuery();
+            int result = Convert.ToInt32(dbDataAdaptor.InsertCommand.ExecuteScalar());
 
             if (dbConn.State == ConnectionState.Open)
                 dbConn.Close();
