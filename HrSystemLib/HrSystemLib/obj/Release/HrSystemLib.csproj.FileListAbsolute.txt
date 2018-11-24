@@ -1,0 +1,5 @@
+D:\keawxiong\MiniProject\HrSystemLib\HrSystemLib\bin\Release\HrSystemLib.dll
+D:\keawxiong\MiniProject\HrSystemLib\HrSystemLib\bin\Release\HrSystemLib.pdb
+D:\keawxiong\MiniProject\HrSystemLib\HrSystemLib\bin\Release\Newtonsoft.Json.dll
+D:\keawxiong\MiniProject\HrSystemLib\HrSystemLib\obj\Release\HrSystemLib.dll
+D:\keawxiong\MiniProject\HrSystemLib\HrSystemLib\obj\Release\HrSystemLib.pdb

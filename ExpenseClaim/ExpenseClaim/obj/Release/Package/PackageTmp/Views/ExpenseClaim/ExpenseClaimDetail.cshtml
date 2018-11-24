@@ -1,0 +1,183 @@
+﻿@model HrSystemLib.Models.ExpenseClaimItem
+
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+<script type="text/javascript">
+    function showdialog()
+    {
+        document.getElementById('myModal').style.display = "block";
+    }
+    function closedialog()
+    {
+        document.getElementById('myModal').style.display = "none";
+    }
+</script>
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title<br /></h1>
+                <h5>@ViewBag.Message</h5>
+            </hgroup>
+
+        </div>
+    </section>
+}
+<br />
+
+<div id="myModal" class="modal">
+@using (Html.BeginForm("AddExpenseClaimItem", "ExpenseClaim", FormMethod.Post))
+{
+    <div class="modal-content">
+        <span class="close" onclick="closedialog()">&times;</span>
+        <h4>New Claim Item</h4><br/>
+        <table>
+            <tr>
+                <td height="40" valign="middle">Transaction Date: </td>
+                <td height="40" valign="middle">@Html.TextBoxFor(model => model.TransactionDate, new { @class = "datepicker", @type = "date" })</td>
+            </tr>
+            <tr>
+                <td height="40" valign="middle">Cost Center: </td>
+                <td height="40" valign="middle">@Html.TextBoxFor(model => model.CostCenter)</td>
+            </tr>
+            <tr>
+                <td height="40" valign="middle">GL Code: </td>
+                <td height="40" valign="middle">@Html.TextBoxFor(model => model.GlCode)</td>
+            </tr>
+            <tr>
+                <td height="40" valign="middle">Description: </td>
+                <td height="40" valign="middle">@Html.TextBoxFor(model => model.Description)</td>
+            </tr>
+            <tr>
+                <td height="40" valign="middle">Amount: </td>
+                <td height="40" valign="middle">@Html.TextBoxFor(model => model.Amount, "{0:n2}")</td>
+            </tr>
+            <tr>
+                <td height="40" valign="middle">Currency: </td>
+                <td height="40" valign="middle">@Html.DropDownListFor(model => model.CurrencyId, (IEnumerable<SelectListItem>)ViewBag.Currencies)</td>
+            </tr>
+        </table><br/>
+        <input width="100" type="submit" value="Add" />&nbsp;
+        <input width="100" type="button" value="Cancel" onclick="closedialog()" />
+    </div>
+}
+</div>
+
+<table class="table table-responsive">
+    <tr>
+        <td height="40" valign="middle">Branch: </td>
+        <td height="40" valign="middle">@Html.TextBox("txtBranch", (string)ViewBag.BranchDesc, new { @readonly = "readonly" })</td>
+    </tr>
+    <tr>
+        <td height="40" valign="middle">Bank: </td>
+        <td height="40" valign="middle">@Html.TextBox("txtBank", (string)ViewBag.BankDesc, new { @readonly = "readonly" })</td>
+    </tr>
+    <tr>
+        <td height="40" valign="middle">Bank Account No: </td>
+        <td height="40" valign="middle">@Html.TextBox("txtBankAccountNo", (string)ViewBag.Claim.BankAccountNo, new { @readonly = "readonly" })</td>
+    </tr>
+    <tr>
+        <td height="40" valign="middle">Bank Account Name: </td>
+        <td height="40" valign="middle">@Html.TextBox("txtBankAccountName", (string)ViewBag.Claim.BankAccountName, new { @readonly = "readonly" })</td>
+    </tr>
+    <tr>
+        <td height="40" valign="middle">Total Local Amount: </td>
+        <td height="40" valign="middle">@Html.TextBox("txtTotalLocalAMount", Decimal.Round((decimal)ViewBag.Claim.TotalLocalAmount, HrSystemLib.Helper.CashDecimalRoundingHelper.CashDecimals), new { @readonly = "readonly" })</td>
+    </tr>
+    <tr>
+        <td height="40" valign="middle">Status: </td>
+        <td height="40" valign="middle">@Html.TextBox("txtStatus", ((HrSystemLib.Models.Interfaces.ClaimStatus)ViewBag.Claim.Status).ToString(), new { @readonly = "readonly" })</td>
+    </tr>
+    <tr>
+        <td height="40" valign="middle">Created On Date: </td>
+        <td height="40" valign="middle">@Html.TextBox("txtCreatedOnDate", ((DateTime)ViewBag.Claim.CreatedOnDate).ToString("yyyy-MM-dd"), new { @readonly = "readonly" })</td>
+    </tr>
+</table><br/>
+
+@if ( ViewBag.Claim.Status == HrSystemLib.Models.Interfaces.ClaimStatus.New || ViewBag.Claim.Status == HrSystemLib.Models.Interfaces.ClaimStatus.Rejected) {
+<button id="myBtn" onclick="showdialog()">Add Claim Item</button>
+<button onclick="location.href='@Url.Action("SubmitExpenseClaimFrom", "ExpenseClaim", new { Id = ViewBag.Claim.Id })'" >Submit Form</button>
+<br/>
+}
+
+@if ( ViewBag.Claim.ClaimItems != null && ViewBag.Claim.ClaimItems.Count > 0) {
+<table class="table" width="100%">
+    <thead>
+        <tr>
+            <th>Transaction Date</th>
+            <th>Cost Center</th>
+            <th>GL Code</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Exchange Rate</th>
+            <th>Local Amount</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (HrSystemLib.Models.ExpenseClaimItem item in ViewBag.Claim.ClaimItems)
+    {
+        <tr>
+            <td>@item.TransactionDate.ToString("yyyy-MM-dd")</td>
+            <td>@item.CostCenter</td>
+            <td>@item.GlCode</td>
+            <td>@item.Description</td>
+            <td>@Decimal.Round(item.Amount, HrSystemLib.Helper.CashDecimalRoundingHelper.CashDecimals)</td>
+            <td>@item.CurrencyCode</td>
+            <td>@Decimal.Round(item.ExchangeRate, HrSystemLib.Helper.CashDecimalRoundingHelper.CurrencyDecimals)</td>
+            <td>@decimal.Round(item.LocalAmount, HrSystemLib.Helper.CashDecimalRoundingHelper.CashDecimals)</td>
+            <td>
+@if ( ViewBag.Claim.Status == HrSystemLib.Models.Interfaces.ClaimStatus.New || ViewBag.Claim.Status == HrSystemLib.Models.Interfaces.ClaimStatus.Rejected) {
+                <a href='@Url.Action("RemoveExpenseClaimItem", "ExpenseClaim", new { Id = item.Id })'>
+                    Remove
+                </a>
+}
+            </td>
+        </tr>
+    }
+</tbody>
+</table>
+}

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2D3FC71E-1BAF-4119-A80B-B3A908FAE6D2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HrSystemLib</RootNamespace>
+    <AssemblyName>HrSystemLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataAccess\BankDA.cs" />
+    <Compile Include="DataAccess\BranchDA.cs" />
+    <Compile Include="DataAccess\CurrencyDA.cs" />
+    <Compile Include="DataAccess\DataAccess.cs" />
+    <Compile Include="DataAccess\ExpenseClaimDA.cs" />
+    <Compile Include="Helper\CashDecimalRoundingHelper.cs" />
+    <Compile Include="Helper\DataAccessHelper.cs" />
+    <Compile Include="Helper\FixerCurrencyHelper.cs" />
+    <Compile Include="Models\Bank.cs" />
+    <Compile Include="Models\Branch.cs" />
+    <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\ExpenseClaim.cs" />
+    <Compile Include="Models\ExpenseClaimItem.cs" />
+    <Compile Include="Models\ExpenseClaimSubmission.cs" />
+    <Compile Include="Models\Interfaces\IBank.cs" />
+    <Compile Include="Models\Interfaces\IBranch.cs" />
+    <Compile Include="Models\Interfaces\IClaim.cs" />
+    <Compile Include="Models\Interfaces\IClaimItem.cs" />
+    <Compile Include="Models\Interfaces\ICurrency.cs" />
+    <Compile Include="Models\Interfaces\ISubmission.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BankService.cs" />
+    <Compile Include="Services\BranchService.cs" />
+    <Compile Include="Services\CurrencyRateService.cs" />
+    <Compile Include="Services\CurrencyService.cs" />
+    <Compile Include="Services\ExpenseClaimService.cs" />
+    <Compile Include="Services\Interfaces\IBankService.cs" />
+    <Compile Include="Services\Interfaces\IBranchService.cs" />
+    <Compile Include="Services\Interfaces\ICurrencyRateService.cs" />
+    <Compile Include="Services\Interfaces\ICurrencyService.cs" />
+    <Compile Include="Services\Interfaces\IClaimService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

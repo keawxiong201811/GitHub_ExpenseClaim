@@ -1,0 +1,50 @@
+﻿
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title<br /></h1>
+                <h5>@ViewBag.Message</h5>
+            </hgroup>
+
+        </div>
+    </section>
+}
+<br />
+
+@if (ViewBag.Claims!= null && ViewBag.Claims.Count > 0)
+{
+    <table class="table" width="100%">
+        <thead>
+            <tr>
+                <th>Branch</th>
+                <th>Bank</th>
+                <th>Bank Account No</th>
+                <th>Bank Account Name</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Created Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (HrSystemLib.Models.ExpenseClaim item in ViewBag.Claims)
+            {
+                <tr>
+                    <td>@item.BranchCode</td>
+                    <td>@item.BankCode</td>
+                    <td>@item.BankAccountNo</td>
+                    <td>@item.BankAccountName</td>
+                    <td>@Decimal.Round(item.TotalLocalAmount, HrSystemLib.Helper.CashDecimalRoundingHelper.CashDecimals)</td>
+                    <td>@item.Status.ToString()</td>
+                    <td>@item.CreatedOnDate.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        <a href='@Url.Action("ViewExpenseClaimForm", "ExpenseClaim", new { Id = item.Id })'>
+                            Detail
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} 

@@ -1,0 +1,45 @@
+﻿@model HrSystemLib.Models.Interfaces.IClaim
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title<br /></h1>
+                <h6>@ViewBag.Message</h6>
+            </hgroup>
+
+        </div>
+    </section>
+}
+<br />
+
+@using (Html.BeginForm("CreateExpenseClaim", "ExpenseClaim", FormMethod.Post))
+{ 
+<table class="table table-responsive">
+    <tr>
+        <td height="40" valign="middle">Branch: </td>
+        <td height="40" valign="middle">@Html.DropDownListFor(model => model.BranchId, (IEnumerable<SelectListItem>)ViewBag.Branches)</td>
+    </tr>
+    <tr>
+        <td height="40" valign="middle">Bank: </td>
+        <td height="40" valign="middle">@Html.DropDownListFor(model => model.BankId, (IEnumerable<SelectListItem>)ViewBag.Banks)</td>
+    </tr>
+    <tr>
+        <td height="40" valign="middle">Bank Account No: </td>
+        <td height="40" valign="middle">@Html.TextBoxFor(model => model.BankAccountNo)</td>
+    </tr>
+    <tr>
+        <td height="40" valign="middle">Bank Account Name: </td>
+        <td height="40" valign="middle">@Html.TextBoxFor(model => model.BankAccountName)</td>
+    </tr>
+    <tr>
+        <td colspan="2"><br /></td>
+    </tr>
+    <tr>
+        <td>
+            <input width="100" type="submit" value="Create" />
+        </td>
+        <td></td>
+    </tr>
+</table>
+}

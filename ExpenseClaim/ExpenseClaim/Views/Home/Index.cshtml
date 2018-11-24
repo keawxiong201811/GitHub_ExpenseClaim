@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            
+        </div>
+    </section>
+}
+<br/>
+
+<div>
+    <a href='@Url.Action("NewExpenseClaimForm", "ExpenseClaim")'>
+        New Expense Claim Form
+    </a>
+</div>
+<br />
+
+<div>
+    <a href='@Url.Action("MyExpenseClaimForms", "ExpenseClaim")'>
+        View My Expense Claim Forms
+    </a>
+</div>
+<br />
+
+@*<div>
+    <a href='@Url.Action("SubmitExpenseClaimFrom", "ExpenseClaim")'>
+        View Submitted Expense Claim Forms
+    </a>
+</div>
+<br />*@
